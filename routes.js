@@ -11,12 +11,12 @@ router.get("/", (req, res) => {
   res.json("It works!");
 });
 
-router.post("/message", addMessage);
+router.post("/contact/:senderNumber/message/:receiverNumber", addMessage);
 
-router.delete("/message", deleteMessage);
+router.delete("/message/:id", deleteMessage);
 
 router.post("/contact", addContact);
 
-router.delete("/contact", deleteContact);
+router.delete("/contact/:phoneNumber", deleteContact);
 
 export default router;

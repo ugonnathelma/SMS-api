@@ -73,13 +73,9 @@ describe("SMS API", () => {
 
     describe("/DELETE route", () => {
       it("returns error message if contact does not exist", done => {
-        const req = {
-          phoneNumber: "+23490865764"
-        };
-
         request(app)
-          .delete("/api/contact")
-          .send(req)
+          .delete("/api/contact/+23490865764")
+          .send()
           .expect(404)
           .end((err, res) => {
             if (err) {
@@ -91,12 +87,9 @@ describe("SMS API", () => {
       });
 
       it("Deletes a contact", done => {
-        const req = {
-          phoneNumber: "+2349086576454"
-        };
         request(app)
-          .delete("/api/contact")
-          .send(req)
+          .delete("/api/contact/+2349086576454")
+          .send()
           .expect(200)
           .end((err, res) => {
             if (err) {
@@ -114,7 +107,7 @@ describe("SMS API", () => {
       it("does not allow an empty message to be sent", done => {
         const req = {};
         request(app)
-          .post("/api/message")
+          .post("/api/contact/+2349086576454/message/+2349086576454")
           .send(req)
           .expect(422)
           .end((err, res) => {
@@ -140,8 +133,6 @@ describe("SMS API", () => {
         };
 
         const msgReq = {
-          receiverNumber: "+234908657645",
-          senderNumber: "+2349086576454",
           message: "hi"
         };
 
@@ -154,17 +145,17 @@ describe("SMS API", () => {
               .send(req2)
               .then(res => {
                 request(app)
-                  .post("/api/message")
+                  .post("/api/contact/+234908657645/message/+2349086576454")
                   .send(msgReq)
                   .expect(201)
                   .end((err, res) => {
                     if (err) {
+           
                       return done(err);
                     }
-
                     expect(res.body.message).to.equal(msgReq.message);
-                    expect(res.body.receiver).to.equal(msgReq.receiverNumber);
-                    expect(res.body.sender).to.equal(msgReq.senderNumber);
+                    expect(res.body.receiver).to.equal('+2349086576454');
+                    expect(res.body.sender).to.equal('+234908657645');
                     done();
                   });
               });
@@ -185,8 +176,6 @@ describe("SMS API", () => {
         };
 
         const msgReq = {
-          receiverNumber: "+2349086576000",
-          senderNumber: "+2349086576454",
           message: "hi"
         };
 
@@ -199,7 +188,7 @@ describe("SMS API", () => {
               .send(req2)
               .then(res => {
                 request(app)
-                  .post("/api/message")
+                  .post("/api/contact/+2349086576454/message/+2349086576000")
                   .send(msgReq)
                   .expect(500)
                   .end((err, res) => {

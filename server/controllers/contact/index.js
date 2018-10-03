@@ -6,7 +6,7 @@ import {
   sendDoesntExistMessageAndStatus,
   sendDeletedMessageAndStatus,
   sendInvalidInputMessageAndStatus,
-  sendAlreadyExistsMessageAndStatus,
+  sendAlreadyExistsMessageAndStatus
 } from "../../utils";
 
 export const addContact = (
@@ -48,7 +48,10 @@ export const addContact = (
   }
 };
 
-export const deleteContact = ({ body: { phoneNumber } }, res) => {
+export const deleteContact = (
+  { params: { phoneNumber } },
+  res
+) => {
   if (isValidPhoneNumber(phoneNumber)) {
     Contact.find({
       where: {
@@ -65,12 +68,12 @@ export const deleteContact = ({ body: { phoneNumber } }, res) => {
               .then(() => {
                 sendDeletedMessageAndStatus(res, "Contact");
               })
-              .catch((err) => {
+              .catch(err => {
                 sendErrorMessageAndStatus(res, err);
               })
           : sendDoesntExistMessageAndStatus(res, "Contact");
       })
-      .catch((err) => {
+      .catch(err => {
         sendErrorMessageAndStatus(res, err);
       });
   } else {

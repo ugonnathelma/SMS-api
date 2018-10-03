@@ -9,7 +9,7 @@ import {
 } from "../../utils";
 
 export const addMessage = (
-  { body: { receiverNumber, message, senderNumber } },
+  { body: { message }, params: { receiverNumber, senderNumber } },
   res
 ) => {
   if (
@@ -38,11 +38,11 @@ export const addMessage = (
   }
 };
 
-export const deleteMessage = ({ body: { messageId } }, res) => {
-  if (messageId && !isNaN(messageId.trim())) {
+export const deleteMessage = ({ params: { id } }, res) => {
+  if (id && !isNaN(id.trim())) {
     Message.find({
       where: {
-        id: messageId.trim()
+        id: id.trim()
       }
     })
       .then(message => {
