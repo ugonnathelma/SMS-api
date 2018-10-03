@@ -1,27 +1,21 @@
 "use strict";
 module.exports = (sequelize, DataTypes) => {
   const Message = sequelize.define(
-    "SMS",
+    "Message",
     {
       message: DataTypes.STRING,
-      status: DataTypes.STRING
+      status: DataTypes.ENUM("sent")
     },
     {}
   );
   Message.associate = function(models) {
-    // associations can be defined here
-    models.Message.belongsTo(models.Contact, {
-      foreignKey: {
-        allowNull: false
-      },
-      as: "receiver"
+    Message.belongsTo(models.Contact, {
+      foreignKey: "sender",
+      onDelete: "CASCADE"
     });
-
-    models.Message.belongsTo(models.Contact, {
-      foreignKey: {
-        allowNull: false
-      },
-      as: "sender"
+    Message.belongsTo(models.Contact, {
+      foreignKey: "receiver",
+      onDelete: "CASCADE"
     });
   };
   return Message;

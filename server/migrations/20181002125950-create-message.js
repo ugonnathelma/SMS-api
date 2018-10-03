@@ -9,17 +9,27 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       message: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       status: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
-      receiverId: {
-        type: Sequelize.INTEGER,
+      receiver: {
+        type: Sequelize.STRING,
         allowNull: false,
-        foreignKey: true
+        references: { model: "Contacts", key: "phone" },
+        onUpdate: "cascade",
+        onDelete: "cascade"
       },
-      senderId: { type: Sequelize.INTEGER, allowNull: false, foreignKey: true },
+      sender: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        references: { model: "Contacts", key: "phone" },
+        onUpdate: "cascade",
+        onDelete: "cascade"
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

@@ -12,7 +12,7 @@ export const isValidPhoneNumber = number => {
   return regex.test(number.trim());
 };
 
-export const sendErrorMessageAndStatus = res => {
+export const sendErrorMessageAndStatus = (res, err) => {
   res.status(500).json({ error: err.message });
 };
 
@@ -21,7 +21,7 @@ export const sendDoesntExistMessageAndStatus = (res, nonExistentData) => {
 };
 
 export const sendDeletedMessageAndStatus = (res, deletedData) => {
-  res.status(200).json({ message: `${nonExistentData} has been deleted` });
+  res.status(200).json({ message: `${deletedData} has been deleted` });
 };
 
 export const sendInvalidInputMessageAndStatus = (res, invalidData) => {

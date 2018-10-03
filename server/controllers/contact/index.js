@@ -37,11 +37,11 @@ export const addContact = (
                 res.status(201).json(contact);
               })
               .catch(err => {
-                sendErrorMessageAndStatus(res);
+                sendErrorMessageAndStatus(res, err);
               });
       })
       .catch(err => {
-        sendErrorMessageAndStatus(res);
+        sendErrorMessageAndStatus(res, err);
       });
   } else {
     sendInvalidInputMessageAndStatus(res, "input");
@@ -65,13 +65,13 @@ export const deleteContact = ({ body: { phoneNumber } }, res) => {
               .then(() => {
                 sendDeletedMessageAndStatus(res, "Contact");
               })
-              .catch(() => {
-                sendErrorMessageAndStatus(res);
+              .catch((err) => {
+                sendErrorMessageAndStatus(res, err);
               })
           : sendDoesntExistMessageAndStatus(res, "Contact");
       })
-      .catch(() => {
-        sendErrorMessageAndStatus(res);
+      .catch((err) => {
+        sendErrorMessageAndStatus(res, err);
       });
   } else {
     sendInvalidInputMessageAndStatus(res, "Phone Number");

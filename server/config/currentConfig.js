@@ -1,6 +1,5 @@
 const dotenv = require("dotenv");
-dotenv.config({ path: "../.env" });
-
+dotenv.config();
 
 const options = {
   development: {
@@ -27,4 +26,6 @@ const options = {
   }
 };
 
-module.exports = options[process.env.NODE_ENV];
+const currentOptions = options[process.env.NODE_ENV];
+
+module.exports = currentOptions;
