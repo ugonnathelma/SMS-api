@@ -1,6 +1,6 @@
 # SMS-api
 
-MySMS is an sms management system that enables users send an sms from to each other.
+SMS-api is an sms management system that enables users send an sms from to each other.
 
 ### Features!
 
