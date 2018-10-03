@@ -1,15 +1,24 @@
 export const isValidFormInput = input => {
-  const isNotEmpty =
-    input.trim() !== "" && input.trim() !== undefined && input.trim() !== null;
+  let isNotEmpty = false;
+  let isAlphabetic = false;
+  if (input) {
+    isNotEmpty =
+      input.trim() !== "" &&
+      input.trim() !== undefined &&
+      input.trim() !== null;
 
-  const isAlphabetic = /^[a-zA-Z]+$/.test(input.trim());
+    isAlphabetic = /^[a-zA-Z]+$/.test(input.trim());
+  }
 
   return isNotEmpty && isAlphabetic;
 };
 
 export const isValidPhoneNumber = number => {
+  let isValid = false;
   const regex = /^\+(?:[0-9] ?){6,14}[0-9]$/;
-  return regex.test(number.trim());
+
+  if (number) isValid = regex.test(number.trim());
+  return isValid;
 };
 
 export const sendErrorMessageAndStatus = (res, err) => {

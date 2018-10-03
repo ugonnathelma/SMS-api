@@ -11,11 +11,12 @@ const options = {
     port: process.env.DB_PORT
   },
   test: {
-    username: "root",
-    password: null,
-    database: "database_test",
+    username: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_TEST_NAME,
     host: "127.0.0.1",
-    dialect: "postgres"
+    dialect: "postgres",
+    port: process.env.DB_PORT
   },
   production: {
     username: "root",

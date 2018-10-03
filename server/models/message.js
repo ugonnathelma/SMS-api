@@ -10,12 +10,18 @@ module.exports = (sequelize, DataTypes) => {
   );
   Message.associate = function(models) {
     Message.belongsTo(models.Contact, {
-      foreignKey: "sender",
-      onDelete: "CASCADE"
+      foreignKey: {
+        name: "sender"
+      },
+      onDelete: "CASCADE",
+      targetKey: "phone"
     });
     Message.belongsTo(models.Contact, {
-      foreignKey: "receiver",
-      onDelete: "CASCADE"
+      foreignKey: {
+        name: "receiver"
+      },
+      onDelete: "CASCADE",
+      targetKey: "phone"
     });
   };
   return Message;
