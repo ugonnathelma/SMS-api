@@ -64,7 +64,7 @@ $ npm test
 | ------ | ------ | ------ |
 | POST | /api/contact | Creates a new contact |
 | DELETE | /api/contact/:id | Deletes contact |
-| POST | /api/contact/:contactId/sms/:messageId | Create a message |
+| POST | /api/contact/:contactId/message/:messageId | Create a message |
 | DELETE | /api/message/:id | Deletes a message |
 
 
