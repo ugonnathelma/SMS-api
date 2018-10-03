@@ -63,8 +63,8 @@ $ npm test
 | VERB | URL | ACTION |
 | ------ | ------ | ------ |
 | POST | /api/contact | Creates a new contact |
-| DELETE | /api/contact/:id | Deletes contact |
-| POST | /api/contact/:contactId/message/:messageId | Create a message |
+| DELETE | /api/contact/:phoneNumber | Deletes contact |
+| POST | /api/contact/:senderNumber/message/:receiverNumber | Create a message |
 | DELETE | /api/message/:id | Deletes a message |
 
 
