@@ -67,6 +67,8 @@ $ npm test
 | POST | /api/contact/:senderNumber/message/:receiverNumber | Create a message |
 | DELETE | /api/message/:id | Deletes a message |
 
+### Apiary Documentation
+https://app.apiary.io/smsapi24
 
 ### Development
 
