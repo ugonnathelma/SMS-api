@@ -1,80 +1,82 @@
 FORMAT: 1A
-HOST: http://polls.apiblueprint.org/
+HOST: http://sms-api/
 
 # sms-api
 
-Polls is a simple API allowing consumers to view polls and vote in them.
+SMS-api is an sms management system that enables users send an sms from to each other.
 
-## Questions Collection [/questions]
+## Add Contact [/api/contact/]
 
-### List All Questions [GET]
-
-+ Response 200 (application/json)
-
-        [
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 2048
-                    }, {
-                        "choice": "Python",
-                        "votes": 1024
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 512
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 256
-                    }
-                ]
-            }
-        ]
-
-### Create a New Question [POST]
-
-You may create your own question using this action. It takes a JSON
-object containing a question and a collection of answers in the
-form of choices.
+### Add a Contact [POST]
 
 + Request (application/json)
 
         {
-            "question": "Favourite programming language?",
-            "choices": [
-                "Swift",
-                "Python",
-                "Objective-C",
-                "Ruby"
-            ]
+            "firstName": "Ugonna",
+            "lastName": "Thelma",
+            "phoneNumber": "+23490865764541"
         }
 
 + Response 201 (application/json)
 
-    + Headers
+        {
+            "id": 4,
+            "first_name": "Ugonna",
+            "last_name": "Thelma",
+            "phone": "+23490865764541",
+            "updatedAt": "2018-10-12T08:15:37.032Z",
+            "createdAt": "2018-10-12T08:15:37.032Z"
+        }
+        
+## Delete Contact [/api/contact/{phoneNumber}]
 
-            Location: /questions/2
+### Delete a Contact [DELETE]
 
-    + Body
++ Parameters
+    + phoneNumber(string) - the phone number to delete
+        
++ Response 200 (application/json)
 
-            {
-                "question": "Favourite programming language?",
-                "published_at": "2015-08-05T08:40:51.620Z",
-                "choices": [
-                    {
-                        "choice": "Swift",
-                        "votes": 0
-                    }, {
-                        "choice": "Python",
-                        "votes": 0
-                    }, {
-                        "choice": "Objective-C",
-                        "votes": 0
-                    }, {
-                        "choice": "Ruby",
-                        "votes": 0
-                    }
-                ]
-            }
+        {
+             "message": "Contact has been deleted"
+        }
+
+## Delete Message [/api/message/{id}]
+
+### Delete a Message [DELETE]
+
++ Parameters
+    + id(number) - the id of the message to delete
+        
++ Response 200 (application/json)
+
+        {
+             "message": "Message has been deleted"
+        }
+        
+# Add Message [/api/contact/{senderNumber}/message/{receiverNumber}]
+
+### Add a Message [POST]
+
++ Parameters
+    + senderNumber(string) - the phone number of the sender
+    + receiverNumber(string) - the phone number of the receiver
+    
++ Request (application/json)
+
+        {
+            "message": "Hello, there",
+        }
+
+        
++ Response 200 (application/json)
+
+        {
+            "id": 7,
+            "message": "Hello, there",
+            "receiver": "+2349086576454",
+            "sender": "+23490865764549",
+            "status": "sent",
+            "updatedAt": "2018-10-12T09:13:43.329Z",
+            "createdAt": "2018-10-12T09:13:43.329Z"
+        }
