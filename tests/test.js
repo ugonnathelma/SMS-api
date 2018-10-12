@@ -203,6 +203,55 @@ describe("SMS API", () => {
               });
           });
       });
+
+      it('deletes a users messages when the user is deleted', (done) => {
+        const req1 = {
+          firstName: "Ugonna",
+          lastName: "Thelma",
+          phoneNumber: "+234908657645"
+        };
+
+        const req2 = {
+          firstName: "Uchenna",
+          lastName: "Thelma",
+          phoneNumber: "+2349086576454"
+        };
+
+        const msgReq = {
+          message: "hi"
+        };
+
+        request(app)
+          .post("/api/contact")
+          .send(req1)
+          .then(res => {
+            request(app)
+              .post("/api/contact")
+              .send(req2)
+              .then(res => {
+                request(app)
+                  .post("/api/contact/+2349086576454/message/+234908657645")
+                  .send(msgReq)
+                  .then(res => {
+                    let message = res.body;
+                    request(app)
+                      .delete("/api/contact/+2349086576454")
+                      .then(res => {
+                        request(app)
+                        .get(`/api/message/${message.id}`)
+                        .expect(404)
+                        .end((err, res) => {
+                          console.log(res.body.error, 'here me')
+                          expect(res.body.error).to.equal(
+                            `Message with Id: ${message.id} doesn't exist`
+                          );
+                          done();
+                        })
+                      })
+                  })
+              });
+          });
+      })
     });
   });
 });

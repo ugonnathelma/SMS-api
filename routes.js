@@ -3,8 +3,10 @@ import {
   addContact,
   deleteContact,
   addMessage,
-  deleteMessage
+  deleteMessage,
+  getMessage
 } from "./server/controllers";
+
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -18,5 +20,6 @@ router.delete("/message/:id", deleteMessage);
 router.post("/contact", addContact);
 
 router.delete("/contact/:phoneNumber", deleteContact);
+router.get("/message/:id", getMessage);
 
 export default router;

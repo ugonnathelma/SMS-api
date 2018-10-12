@@ -5,7 +5,9 @@ import {
   sendErrorMessageAndStatus,
   sendDoesntExistMessageAndStatus,
   sendDeletedMessageAndStatus,
-  sendInvalidInputMessageAndStatus
+  sendInvalidInputMessageAndStatus,
+  getErrorMessageAndStatus,
+  sendFailedGetMessageMessageAndStatus
 } from "../../utils";
 
 export const addMessage = (
@@ -65,5 +67,25 @@ export const deleteMessage = ({ params: { id } }, res) => {
       });
   } else {
     sendInvalidInputMessageAndStatus(res, "Message Id");
+  }
+};
+
+export const getMessage = ({ params: { id } }, res) => {
+  if (id && !isNaN(id.trim())) {
+    Message.find({
+      where: {
+        id: id.trim()
+      }
+    })
+      .then(message => {
+        message
+          ? res.status(200).json(message)
+          : sendFailedGetMessageMessageAndStatus(res, id);
+      })
+      .catch(err => {
+        getErrorMessageAndStatus(res, err);
+      });
+  } else {
+    sendInvalidInputMessageAndStatus(res, "input");
   }
 };

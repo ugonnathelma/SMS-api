@@ -1,2 +1,2 @@
 export { addContact, deleteContact } from "./contact";
-export { addMessage, deleteMessage } from "./message";
+export { addMessage, deleteMessage, getMessage } from "./message";

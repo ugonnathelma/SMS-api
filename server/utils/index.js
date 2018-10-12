@@ -40,3 +40,11 @@ export const sendInvalidInputMessageAndStatus = (res, invalidData) => {
 export const sendAlreadyExistsMessageAndStatus = (res, existingData) => {
   res.status(409).json({ message: `${existingData} already exists` });
 };
+
+export const getErrorMessageAndStatus = (res, err) => {
+  res.status(500).json({ error: err.message });
+};
+
+export const sendFailedGetMessageMessageAndStatus = (res, messageId) => {
+  res.status(404).json({ error: `Message with Id: ${messageId} doesn't exist` });
+};
