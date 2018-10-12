@@ -41,7 +41,7 @@ SMS-api is an sms management system that enables users send an sms from to each 
              "message": "Contact has been deleted"
         }
 
-## Delete Message [/api/message/{id}]
+## Message Collection [/api/message/{id}]
 
 ### Delete a Message [DELETE]
 
@@ -54,7 +54,7 @@ SMS-api is an sms management system that enables users send an sms from to each 
              "message": "Message has been deleted"
         }
         
-# Add Message [/api/contact/{senderNumber}/message/{receiverNumber}]
+## Add Message [/api/contact/{senderNumber}/message/{receiverNumber}]
 
 ### Add a Message [POST]
 
@@ -74,6 +74,25 @@ SMS-api is an sms management system that enables users send an sms from to each 
         {
             "id": 7,
             "message": "Hello, there",
+            "receiver": "+2349086576454",
+            "sender": "+23490865764549",
+            "status": "sent",
+            "updatedAt": "2018-10-12T09:13:43.329Z",
+            "createdAt": "2018-10-12T09:13:43.329Z"
+        }
+        
+## Get Message [/api/message/{id}]
+
+### Get a Message [GET]
+
++ Parameters
+    + id(number) - the id of the message to delete
+        
++ Response 200 (application/json)
+
+        {
+            "id": 7,
+            "message": "hi",
             "receiver": "+2349086576454",
             "sender": "+23490865764549",
             "status": "sent",
