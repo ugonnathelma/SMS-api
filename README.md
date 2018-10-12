@@ -32,14 +32,14 @@ $ npm install
 
 If you have postgres db already online, then copy the db url and add it to the `env file` as as `DATABASE_URL= '<link from dashboard>'` else if you are using postgres locally, then you need to do the following:
 1. Create a db: Type `creadtedb <db name>` in your terminal
- 2. Add an example of the following to your .env file
+ 2. Add an example of the following to your .env file, Note that DB_PASSWORD is optional
 
    ```
   DB_PASSWORD=
   DB_USER=
   DB_NAME=
   DB_TEST_NAME=
-  DB_PORT=
+  DB_PORT=5432
   NODE_ENV=development
   HOST=127.0.0.1
    ```
