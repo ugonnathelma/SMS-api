@@ -1,0 +1,82 @@
+FORMAT: 1A
+HOST: http://smsapi/
+
+# sms-api
+
+SMS-api is an sms management system that enables users send an sms from to each other.
+
+## Add Contact [/api/contact/]
+
+### Add a Contact [POST]
+
++ Request (application/json)
+
+        {
+            "firstName": "Ugonna",
+            "lastName": "Thelma",
+            "phoneNumber": "+23490865764541"
+        }
+
++ Response 201 (application/json)
+
+        {
+            "id": 4,
+            "first_name": "Ugonna",
+            "last_name": "Thelma",
+            "phone": "+23490865764541",
+            "updatedAt": "2018-10-12T08:15:37.032Z",
+            "createdAt": "2018-10-12T08:15:37.032Z"
+        }
+        
+## Delete Contact [/api/contact/{phoneNumber}]
+
+### Delete a Contact [DELETE]
+
++ Parameters
+    + phoneNumber(string) - the phone number to delete
+        
++ Response 200 (application/json)
+
+        {
+             "message": "Contact has been deleted"
+        }
+
+## Delete Message [/api/message/{id}]
+
+### Delete a Message [DELETE]
+
++ Parameters
+    + id(number) - the id of the message to delete
+        
++ Response 200 (application/json)
+
+        {
+             "message": "Message has been deleted"
+        }
+        
+# Add Message [/api/contact/{senderNumber}/message/{receiverNumber}]
+
+### Add a Message [POST]
+
++ Parameters
+    + senderNumber(string) - the phone number of the sender
+    + receiverNumber(string) - the phone number of the receiver
+    
++ Request (application/json)
+
+        {
+            "message": "Hello, there",
+        }
+
+        
++ Response 200 (application/json)
+
+        {
+            "id": 7,
+            "message": "Hello, there",
+            "receiver": "+2349086576454",
+            "sender": "+23490865764549",
+            "status": "sent",
+            "updatedAt": "2018-10-12T09:13:43.329Z",
+            "createdAt": "2018-10-12T09:13:43.329Z"
+        }
