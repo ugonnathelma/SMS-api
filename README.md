@@ -25,7 +25,7 @@ SMS-api is an sms management system that enables users send an sms from to each 
 SMS-api requires you have [Node.js](https://nodejs.org/) v7+. Check your node version by typing `node -v`
 
 ```sh
-$ git clone https://github.com/hngerebara/MySMS.git
+$ git clone https://github.com/ugonnathelma/SMS-api.git
 $ cd <into folder>
 $ npm install
 ```
